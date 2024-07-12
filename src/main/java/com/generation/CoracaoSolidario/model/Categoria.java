@@ -1,5 +1,9 @@
 package com.generation.CoracaoSolidario.model;
 
+import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 
@@ -16,6 +20,10 @@ public class Categoria {
 
     @NotNull(message = "Este atributo é obrigatório!")
     private String descricao;
+    
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "categoria", cascade = CascadeType.REMOVE)
+	@JsonIgnoreProperties("categoria")
+	private List<Doacao> doacao;
 
     public Long getId() {
         return id;
@@ -40,4 +48,13 @@ public class Categoria {
     public void setDescricao(String descricao) {
         this.descricao = descricao;
     }
+
+	public List<Doacao> getDoacao() {
+		return doacao;
+	}
+
+	public void setDoacao(List<Doacao> doacao) {
+		this.doacao = doacao;
+	}
+    
 }
