@@ -58,7 +58,7 @@ public class DoacaoController {
 			return ResponseEntity.status(HttpStatus.CREATED)
 				.body(doacaoRepository.save(doacao));
 		
-		throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tema nao existe!", null);
+		throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Categoria não existe!", null);
 	}
 
     @PutMapping
@@ -68,11 +68,12 @@ public class DoacaoController {
 			if(categoriaRepository.existsById(doacao.getCategoria().getId()))
 				return ResponseEntity.status(HttpStatus.OK)
 						.body(doacaoRepository.save(doacao));
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Tema nao existe!", null);
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Categoria não existe!", null);
 		}
 		
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
 	}
+    
 
     @ResponseStatus(HttpStatus.NO_CONTENT)
     @DeleteMapping("/{id}")
