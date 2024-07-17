@@ -3,6 +3,7 @@ package com.generation.CoracaoSolidario.service;
 import com.generation.CoracaoSolidario.model.Usuario;
 import com.generation.CoracaoSolidario.model.UsuarioLogin;
 import com.generation.CoracaoSolidario.repository.UsuarioRepository;
+import com.generation.CoracaoSolidario.security.JwtService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -27,6 +28,15 @@ public class UsuarioService {
     private AuthenticationManager authenticationManager;
 
     public Optional<Usuario> cadastrarUsuario(Usuario usuario) {
+        if (usuarioRepository.findByUsuario(usuario.getUsuario()).isPresent())
+            return Optional.empty();
+
+        usuario.setSenha(criptografarSenha(usuario.getSenha()));
+
+        return Optional.of(usuarioRepository.save(usuario));
+    }
+
+    public Optional<Usuario> atualizarUsuario(Usuario usuario) {
         if (usuarioRepository.findById(usuario.getId()).isPresent()) {
             Optional<Usuario> buscaUsuario = usuarioRepository.findByUsuario(usuario.getUsuario());
 

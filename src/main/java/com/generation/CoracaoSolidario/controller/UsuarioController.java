@@ -10,6 +10,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
 import java.util.Optional;
 
 @RestController
@@ -24,6 +25,11 @@ public class UsuarioController {
     private UsuarioRepository usuarioRepository;
 
     @GetMapping("/all")
+    public ResponseEntity<List<Usuario>> getAll() {
+        return ResponseEntity.ok(usuarioRepository.findAll());
+    }
+
+    @GetMapping("/{id}")
     public ResponseEntity<Usuario> getById(@PathVariable Long id) {
         return usuarioRepository.findById(id)
                 .map(resposta -> ResponseEntity.ok(resposta))
