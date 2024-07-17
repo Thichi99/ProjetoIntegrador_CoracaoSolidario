@@ -1,4 +1,4 @@
-package com.generation.CoracaoSolidario.Security;
+package com.generation.CoracaoSolidario.security;
 
 import java.util.Optional;
 

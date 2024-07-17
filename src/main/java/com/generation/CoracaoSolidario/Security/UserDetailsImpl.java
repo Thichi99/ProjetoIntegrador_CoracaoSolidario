@@ -1,4 +1,4 @@
-package com.generation.CoracaoSolidario.Security;
+package com.generation.CoracaoSolidario.security;
 
 import com.generation.CoracaoSolidario.model.Usuario;
 import org.springframework.security.core.GrantedAuthority;
