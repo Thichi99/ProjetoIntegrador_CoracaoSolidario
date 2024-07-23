@@ -28,12 +28,12 @@ public class SwaggerConfig {
                                 .name("Wellington Albino, Lucas Carlos, Thiago Lima, Wendy Souza, Camila Vildoso, Caroline Coutinho")
                                 .url("https://github.com/Thichi99/ProjetoIntegrador_CoracaoSolidario")
                                 .email(
-                                        "well.renato@hotmail.com\n" +
-                                                "contato.wendy@hotmail.com\n" +
-                                                "lucassscarlosss54@gmail.com\n" +
-                                                "thiago.plima99@gmail.com\n" +
-                                                "contacaroline.coutinho@gmail.com\n" +
-                                                "camiliun123@gmail.com"
+                                        "well.renato@hotmail.com " +
+                                                "contato.wendy@hotmail.com " +
+                                                "lucassscarlosss54@gmail.com " +
+                                                "thiago.plima99@gmail.com " +
+                                                "contacaroline.coutinho@gmail.com " +
+                                                "camiliun123@gmail.com "
                                 )))
                 .externalDocs(new ExternalDocumentation()
                         .description("Github")
