@@ -9,5 +9,5 @@ import com.generation.CoracaoSolidario.model.Doacao;
 
 public interface DoacaoRepository extends JpaRepository<Doacao, Long>{
 
-	public List<Doacao> findAllByDestinoContainingIgnoreCase(@Param("destino") String destino);
+	//public List<Doacao> findAllByDestinoContainingIgnoreCase(@Param("destino") String destino);
 }

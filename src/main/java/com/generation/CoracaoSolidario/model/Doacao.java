@@ -2,6 +2,7 @@ package com.generation.CoracaoSolidario.model;
 
 import java.time.LocalDateTime;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
 import org.hibernate.annotations.UpdateTimestamp;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
@@ -28,16 +29,18 @@ public class Doacao {
 	@NotNull(message = "Este atributo é obrigatório!")
 	private String descricao;
 	
-	@NotNull(message = "Este atributo é obrigatório!")
-	private String destino;
-	
 	@UpdateTimestamp
 	private LocalDateTime dataDoacao;
 	
-	
 	@ManyToOne
 	@JsonIgnoreProperties("doacao")
+	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
 	private Categoria categoria;
+
+	@ManyToOne
+	@JsonIgnoreProperties("doacao")
+	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
+	private Destino destino;
 
 	@ManyToOne
 	@JsonIgnoreProperties("doacao")
@@ -74,12 +77,12 @@ public class Doacao {
 	}
 
 
-	public String getDestino() {
+	public Destino getDestino() {
 		return destino;
 	}
 
 
-	public void setDestino(String destino) {
+	public void setDestino(Destino destino) {
 		this.destino = destino;
 	}
 
