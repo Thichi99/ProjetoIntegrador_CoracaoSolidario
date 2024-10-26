@@ -3,6 +3,7 @@ package com.generation.CoracaoSolidario.controller;
 import java.util.List;
 import java.util.Optional;
 
+import com.generation.CoracaoSolidario.repository.DestinoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -34,6 +35,9 @@ public class DoacaoController {
 	
 	@Autowired
 	private CategoriaRepository categoriaRepository;
+
+    @Autowired
+    private DestinoRepository destinoRepository;
 	
 	 @GetMapping
 	 public ResponseEntity<List<Doacao>> getAll() {
@@ -47,28 +51,28 @@ public class DoacaoController {
                 .orElse(ResponseEntity.status(HttpStatus.NOT_FOUND).build());
     }
 
-    @GetMapping("/destino/{destino}")
-    public ResponseEntity<List<Doacao>> getByDestino(@PathVariable String destino) {
-        return ResponseEntity.ok(doacaoRepository.findAllByDestinoContainingIgnoreCase(destino));
-    }
+    //@GetMapping("/destino/{destino}")
+    //public ResponseEntity<List<Doacao>> getByDestino(@PathVariable String destino) {
+        //return ResponseEntity.ok(doacaoRepository.findAllByDestinoContainingIgnoreCase(destino));
+    //}
 
     @PostMapping
     public ResponseEntity<Doacao> post(@Valid @RequestBody Doacao doacao){
-		if(categoriaRepository.existsById(doacao.getCategoria().getId()))
+		if(categoriaRepository.existsById(doacao.getCategoria().getId()) && destinoRepository.existsById(doacao.getDestino().getId()))
 			return ResponseEntity.status(HttpStatus.CREATED)
 				.body(doacaoRepository.save(doacao));
 		
-		throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Categoria não existe!", null);
+		throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Categoria ou Destino não existe!", null);
 	}
 
     @PutMapping
     public ResponseEntity<Doacao> put(@Valid @RequestBody Doacao doacao){
 		if(doacaoRepository.existsById(doacao.getId())) {
 			
-			if(categoriaRepository.existsById(doacao.getCategoria().getId()))
+			if(categoriaRepository.existsById(doacao.getCategoria().getId()) && destinoRepository.existsById(doacao.getCategoria().getId()))
 				return ResponseEntity.status(HttpStatus.OK)
 						.body(doacaoRepository.save(doacao));
-			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Categoria não existe!", null);
+			throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Categoria ou Destino não existe!", null);
 		}
 		
 		return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
