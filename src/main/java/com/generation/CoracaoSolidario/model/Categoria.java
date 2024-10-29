@@ -2,6 +2,7 @@ package com.generation.CoracaoSolidario.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.*;
@@ -22,7 +23,8 @@ public class Categoria {
     private String descricao;
     
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "categoria", cascade = CascadeType.REMOVE)
-	@JsonIgnoreProperties("categoria")
+	//@JsonIgnoreProperties("categoria")
+    @JsonIgnore
 	private List<Doacao> doacao;
 
     public Long getId() {

@@ -1,5 +1,6 @@
 package com.generation.CoracaoSolidario.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
@@ -17,7 +18,8 @@ public class Destino {
     private String nome;
 
     @OneToMany(fetch = FetchType.LAZY, mappedBy = "destino", cascade = CascadeType.REMOVE)
-    @JsonIgnoreProperties("destino")
+    //@JsonIgnoreProperties("destino")
+    @JsonIgnore
     private List<Doacao> doacao;
 
     public Long getId() {

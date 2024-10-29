@@ -33,13 +33,11 @@ public class Doacao {
 	private LocalDateTime dataDoacao;
 	
 	@ManyToOne
-	@JsonIgnoreProperties("doacao")
-	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
+	@JsonIgnoreProperties(value = "doacoes", allowSetters = true)
 	private Categoria categoria;
 
 	@ManyToOne
-	@JsonIgnoreProperties("doacao")
-	@JsonProperty(access = JsonProperty.Access.READ_ONLY)
+	@JsonIgnoreProperties(value = "doacoes", allowSetters = true)
 	private Destino destino;
 
 	@ManyToOne
